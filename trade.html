@@ -1,0 +1,468 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Trader Book </title>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>  
+      <style type="text/css">
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+}
+.wrapper{
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+ position: fixed;
+ width: 100%;
+}
+.wrapper nav{
+  position: relative;
+  display: flex;
+  max-width: calc(100% - 200px);
+  margin: 0 auto;
+  height: 70px;
+  align-items: center;
+  justify-content: space-between;
+}
+nav .content{
+  display: flex;
+  align-items: center;
+}
+nav .content .links{
+  margin-left: 80px;
+  display: flex;
+}
+.content .logo a{
+  color: #fff;
+  font-size: 40px;
+  font-weight: 600;
+}
+.content .links li{
+  list-style: none;
+  line-height: 70px;
+}
+.content .links li a,
+.content .links li label{
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 9px 17px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+.content .links li label{
+  display: none;
+}
+.content .links li a:hover,
+.content .links li label:hover{
+background-image: linear-gradient( 135deg, #ff00ff 10%, #0000ff 100%);
+}
+
+.wrapper .search-icon,
+.wrapper .menu-icon{
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  line-height: 70px;
+  width: 70px;
+  text-align: center;
+}
+.wrapper .menu-icon{
+  display: none;
+}
+.wrapper #show-search:checked ~ .search-icon i::before{
+  content: "\f00d";
+}
+
+.wrapper .search-box{
+  position: absolute;
+  height: 100%;
+  max-width: calc(100% - 50px);
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+.wrapper #show-search:checked ~ .search-box{
+  opacity: 1;
+  pointer-events: auto;
+}
+.search-box input{
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  font-size: 17px;
+  color: #fff;
+  background: #171c24;
+  padding: 0 100px 0 15px;
+}
+.search-box input::placeholder{
+  color: #f2f2f2;
+}
+.search-box .go-icon{
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  line-height: 60px;
+  width: 70px;
+  background: #171c24;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+.wrapper input[type="checkbox"]{
+  display: none;
+}
+
+
+/* Responsive code start */
+@media screen and (max-width: 1250px){
+  .wrapper nav{
+    max-width: 100%;
+    padding: 0 20px;
+  }
+  nav .content .links{
+    margin-left: 30px;
+  }
+  .content .links li a{
+    padding: 8px 13px;
+  }
+  .wrapper .search-box{
+    max-width: calc(100% - 100px);
+  }
+  .wrapper .search-box input{
+    padding: 0 100px 0 15px;
+  }
+}
+@media screen and (max-width: 900px){
+  .wrapper .menu-icon{
+    display: block;
+  }
+  .wrapper #show-menu:checked ~ .menu-icon i::before{
+    content: "\f00d";
+  }
+  nav .content .links{
+    display: block;
+    position: fixed;
+    background: #14181f;
+    height: 100%;
+    width: 100%;
+    top: 70px;
+    left: -100%;
+    margin-left: 0;
+    max-width: 350px;
+    overflow-y: auto;
+    padding-bottom: 100px;
+    transition: all 0.3s ease;
+  }
+  nav #show-menu:checked ~ .content .links{
+    left: 0%;
+  }
+  .content .links li{
+    margin: 15px 20px;
+  }
+  .content .links li a,
+  .content .links li label{
+    line-height: 40px;
+    font-size: 20px;
+    display: block;
+    padding: 8px 18px;
+    cursor: pointer;
+  }
+  .content .links li a.desktop-link{
+    display: none;
+  }
+  .content .links ul li{
+    margin: 7px 20px;
+  }
+  .content .links ul li a{
+    font-size: 18px;
+    line-height: 30px;
+    border-radius: 5px!important;
+  }
+}
+@media screen and (max-width: 400px){
+  .wrapper nav{
+    padding: 0 10px;
+  }
+  .content .logo a{
+    font-size: 27px;
+  }
+  .wrapper .search-box{
+    max-width: calc(100% - 70px);
+  }
+  .wrapper .search-box .go-icon{
+    width: 30px;
+    right: 0;
+  }
+  .wrapper .search-box input{
+    padding-right: 30px;
+  }
+}
+.dummy-text{
+  position: absolute;
+  top: 220%;
+  left: 50%;
+  width: 100%;
+  z-index: -1;
+  padding: 0 20px;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  color:#ffffff;
+}
+.dummy-text h2{
+  font-size: 45px;
+  margin: 5px 0;
+}
+ body{
+  height: 100vh;;
+  width: 100%;
+  display: flex;
+  background-image: linear-gradient( 135deg, #0000ff  10%, #F6416C 100%);
+}
+::selection{
+  color: #0000ff;
+  background: #0000ff;
+}
+body::before,
+body::after{
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+body::before{
+  clip-path: circle(30% at left 20%);
+  opacity: 0.4;
+  background-image: linear-gradient( 135deg, #ffffff 10%, #ff9a9e 100%);
+}
+body::after{
+  opacity: 0.4;
+  clip-path: circle(25% at right 80%);
+  background-image: linear-gradient( 135deg, #ffffff 10%, #0000ff 100%);
+}
+
+
+
+.main{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url(images/back.jpg);
+  background-position: center;
+  background-size: cover;
+}
+.profile-card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 400px;
+  width: 100%;
+  border-radius: 25px;
+  padding: 30px;
+  border: 1px solid #ffffff40;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+}
+.image{
+  position: relative;
+  height: 150px;
+  width: 150px;
+}
+.image .profile-pic{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+}
+.data{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+}
+.data h2{
+  font-size: 33px;
+  font-weight: 600;
+}
+span{
+  font-size: 18px;
+}
+.row{
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+}
+.row .info{
+  text-align: center;
+  padding: 0 20px;
+}
+.buttons{
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+}
+.buttons .btn{
+  color: #fff;
+  text-decoration: none;
+  margin: 0 20px;
+  padding: 8px 25px;
+  border-radius: 25px;
+  font-size: 18px;
+  white-space: nowrap;
+  background: linear-gradient(to left, #ff00ff 0%, #ffffff 100%);
+}
+.buttons .btn:hover{
+  box-shadow: inset 0 5px 20px rgba(0,0,0,0.4);
+}
+
+</style>
+</head>
+<body>
+
+  <div class="wrapper">
+    <nav>
+      <label for="show-menu" class="menu-icon"><i class="fas fa-bars"></i></label>
+      <div class="content">
+      <div class="logo"><a href="traders1.html">Trader Book</a></div>
+        <ul class="links">
+          <li><a href="traders1.html">HOME</a></li>
+          <li><a href="news1.html">NEWS</a></li>
+          <li>
+            <a href="trade.html" class="desktop-link">TRADE</a>
+            <input type="checkbox" id="show-features">
+            <label for="show-features">TRADE</label>
+          </li>
+          <li>
+            <a href="support.html" class="desktop-link">SUPPORT</a>
+            <input type="checkbox" id="show-services">
+            <label for="show-services">SUPPORT</label>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <label for="show-search" class="search-icon"><i class="fas fa-search"></i></label>
+    </nav>
+  </div>
+  <div class="dummy-text">
+
+<section class="main">
+  <div class="profile-card">
+    <div class="image">
+    </div>
+    <div class="data">
+      <h2>Invest In Traders</h2>
+      <span>Invest Your Funds in traders,
+	  who will, in return give you in folds</span>
+    </div>
+    <div class="row">
+      <div class="info">
+        <h3>Current Investors</h3>
+        <span>13,208</span>
+      </div>
+      <div class="info">
+        <h3>Totals Investors</h3>
+        <span>20,951</span>
+      </div>
+    </div>
+    <div class="buttons">
+      <a href="invest1.html" class="btn">Start</a>
+    </div>
+  </div>
+</section>
+  
+  <section class="main">
+  <div class="profile-card">
+    <div class="image">
+    </div>
+    <div class="data">
+      <h2>Expert Signals</h2>
+      <span>trade with trusted signals from experts,
+	  which will help you start up with any little amount of funds</span>
+    </div>
+    <div class="row">
+      <div class="info">
+        <h3>Current Subcribers</h3>
+        <span>4,245</span>
+      </div>
+      <div class="info">
+        <h3>Totals Subcribers</h3>
+        <span>10,021</span>
+      </div>
+    </div>
+    <div class="buttons">
+      <a href="signals1.html" class="btn">Start</a>
+    </div>
+  </div>
+</section>
+
+<section class="main">
+  <div class="profile-card">
+    <div class="image">
+    </div>
+    <div class="data">
+      <h2>Learn To Trade </h2>
+      <span>Become An Expert yourself,
+	  by Taking park in our online classes,
+	  and we pay you for the signal you will supply to us</span>
+    </div>
+    <div class="row">
+      <div class="info">
+        <h3>Current Students</h3>
+        <span>124</span>
+      </div>
+      <div class="info">
+        <h3>Totals Students</h3>
+        <span>625</span>
+      </div>
+    </div>
+    <div class="buttons">
+      <a href="learn1.html" class="btn">Start</a>
+    </div>
+  </div>
+</section>
+
+<section class="main">
+  <div class="profile-card">
+    <div class="image">
+    </div>
+    <div class="data">
+      <h2>Already An Experts</h2>
+      <span>Give us Your Signals And Get paid for it</span>
+    </div>
+    <div class="row">
+      <div class="info">
+        <h3>Current Experts</h3>
+        <span>10</span>
+      </div>
+      <div class="info">
+        <h3>Totals Experts</h3>
+        <span>45</span>
+      </div>
+    </div>
+    <div class="buttons">
+      <a href="experts1.html" class="btn">Start</a>
+    </div>
+  </div>
+</section>
+  
+  </body>
+</html>
